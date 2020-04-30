@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+
+body{
+background-color:blue;
+}
+.box {
+    border-radius: 5px;
+    background-color: #eee;
+    padding: 20px 5px;
+}
+button {
+    background-color: red;
+
+
+}
+
+</style>
+ 
+
+</head>
+<body >
+
+
+<h1> CURRENT MATCHES</h1>
+<p id="demo"></p>
+<div id="getMessage">
+
+<button onclick="function ()">Click me </button>
+</div>
+
+<div class="message">
+
+</div>
+
+
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',function(){
+    document.getElementById('getMessage').onclick=function(){
+      req=new XMLHttpRequest();
+      req.open("GET",'https://cricapi.com/api/cricket?apikey=UwXRTqL11Nf4ZRcvZTqxipYp1bn2',true);
+      req.send();
+      req.onload=function(){
+       var json=JSON.parse(req.responseText); 
+       //document.getElementsByClassName('message')[0].innerHTML=JSON.stringify(json);
+        // Add your code below this line
+ 	
+       for(var i=0;i<json.data.length;i++){
+    	  var z= json.data[i].description;
+           
+    	   document.write("<button  style='float:right;color:red;margin:20px;padding:5px'>"+z+" </button>" );
+    	  document.write('<br>');
+          document.getElementById("demo").innerHTML=""; 
+          
+    	 
+       };
+     
+      
+      };
+      function AutoRefresh( t ) {
+               setTimeout("location.reload(true);", t);
+            } AutoRefresh(10000);
+
+      
+        // Add your code above this line
+    
+    };
+  });
+  var myVar = setInterval(myTimer, 1000);
+
+function myTimer() {
+  var d = new Date();
+  document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+}
+
+
+
+
+
+   </script>
+</body>
+</html>
